@@ -1,0 +1,29 @@
+steps:
+  # Step 1: Build the container image using the Dockerfile inside the app_build directory
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'app_build'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/wardrobe-app', '.']
+  
+  # Step 2: Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/wardrobe-app']
+  
+  # Step 3: Deploy the container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'wardrobe-app'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/wardrobe-app'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+
+images:
+  - 'gcr.io/$PROJECT_ID/wardrobe-app'
