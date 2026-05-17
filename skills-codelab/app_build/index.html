@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardrobe Manager | Premium Style</title>
+    <meta name="description" content="Manage your wardrobe and create stunning outfits.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>Lumière</h1>
+                <p>Wardrobe</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-view="dashboard">Dashboard</li>
+                <li data-view="gallery">My Wardrobe</li>
+                <li data-view="outfits">Outfit Builder</li>
+                <li data-view="add-item" class="btn-add">+ Add Item</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- Dashboard View -->
+            <section id="dashboard" class="view-section active">
+                <header>
+                    <h2>Welcome Back, Stylist</h2>
+                    <p>Here is an overview of your wardrobe today.</p>
+                </header>
+                <div class="stats-grid">
+                    <div class="stat-card glass">
+                        <h3>Total Items</h3>
+                        <p id="stat-total">0</p>
+                    </div>
+                    <div class="stat-card glass">
+                        <h3>Tops</h3>
+                        <p id="stat-tops">0</p>
+                    </div>
+                    <div class="stat-card glass">
+                        <h3>Bottoms</h3>
+                        <p id="stat-bottoms">0</p>
+                    </div>
+                    <div class="stat-card glass">
+                        <h3>Shoes</h3>
+                        <p id="stat-shoes">0</p>
+                    </div>
+                </div>
+                <div class="recent-outfits glass">
+                    <h3>Recent Outfits</h3>
+                    <div class="outfit-carousel" id="recent-outfits-container">
+                        <p class="empty-state">No outfits created yet. Head to the Outfit Builder!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wardrobe Gallery View -->
+            <section id="gallery" class="view-section hidden">
+                <header>
+                    <h2>My Wardrobe</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="Top">Tops</button>
+                        <button class="filter-btn" data-filter="Bottom">Bottoms</button>
+                        <button class="filter-btn" data-filter="Shoes">Shoes</button>
+                        <button class="filter-btn" data-filter="Outerwear">Outerwear</button>
+                        <button class="filter-btn" data-filter="Accessory">Accessories</button>
+                    </div>
+                </header>
+                <div class="gallery-grid" id="wardrobe-gallery-grid">
+                    <!-- Items will be injected here -->
+                </div>
+            </section>
+
+            <!-- Outfit Builder View -->
+            <section id="outfits" class="view-section hidden">
+                <header>
+                    <h2>Outfit Builder</h2>
+                    <p>Mix and match your items to create a look.</p>
+                </header>
+                <div class="outfit-builder-layout">
+                    <!-- Builder Canvas -->
+                    <div class="builder-canvas glass">
+                        <div class="canvas-slot" id="slot-top" data-category="Top">Select Top</div>
+                        <div class="canvas-slot" id="slot-bottom" data-category="Bottom">Select Bottom</div>
+                        <div class="canvas-slot" id="slot-shoes" data-category="Shoes">Select Shoes</div>
+                        <div class="canvas-actions">
+                            <input type="text" id="outfit-name" placeholder="Outfit Name" class="input-glass">
+                            <button class="btn-primary" id="save-outfit-btn">Save Outfit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Selection Panel -->
+                    <div class="selection-panel glass">
+                        <h3>Available Items</h3>
+                        <div class="selection-grid" id="builder-items-grid">
+                            <!-- Items for selection will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Item View -->
+            <section id="add-item" class="view-section hidden">
+                <header>
+                    <h2>Add New Item</h2>
+                </header>
+                <div class="form-container glass">
+                    <form id="add-item-form">
+                        <div class="form-group">
+                            <label for="item-name">Name / Brand</label>
+                            <input type="text" id="item-name" class="input-glass" required placeholder="e.g. Classic White Tee">
+                        </div>
+                        <div class="form-group">
+                            <label for="item-category">Category</label>
+                            <select id="item-category" class="input-glass" required>
+                                <option value="Top">Top</option>
+                                <option value="Bottom">Bottom</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Outerwear">Outerwear</option>
+                                <option value="Accessory">Accessory</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-color">Color</label>
+                            <input type="text" id="item-color" class="input-glass" required placeholder="e.g. White">
+                        </div>
+                        <div class="form-group">
+                            <label for="item-image">Image URL (Optional)</label>
+                            <input type="url" id="item-image" class="input-glass" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <button type="submit" class="btn-primary">Add to Wardrobe</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
